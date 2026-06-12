@@ -1,0 +1,542 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --parchment: #f6e5c8;
+    --parchment-light: #faeed9;
+    --brown: #684d3a;
+    --brown-light: rgba(104, 77, 58, 0.25);
+    --brown-hover: rgba(104, 77, 58, 0.6);
+    --cream: #fff8eb;
+    --gold: #F2BF40;
+    --gold-dark: #d4a020;
+    --red: #ec3750;
+    --green: #4ade80;
+    --green-dark: #16a34a;
+    --shadow: 0 4px 6px -1px rgba(104, 77, 58, 0.15), 0 2px 4px -2px rgba(104, 77, 58, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(104, 77, 58, 0.15), 0 4px 6px -4px rgba(104, 77, 58, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--parchment);
+    color: var(--brown);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+nav {
+    background-color: var(--brown);
+    color: var(--cream);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--brown);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+nav .logo a {
+    color: var(--cream);
+    text-decoration: none;
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--brown);
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--brown);
+    opacity: 0.75;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.calc-card {
+    background: var(--cream);
+    border: 3px solid var(--brown);
+    box-shadow: var(--shadow-lg);
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.calc-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid var(--brown);
+}
+
+.toggle-group {
+    display: flex;
+    gap: 0;
+    margin-bottom: 2rem;
+    border: 3px solid var(--brown);
+    overflow: hidden;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 0.85rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border: none;
+    background: var(--cream);
+    color: var(--brown);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.toggle-btn.active {
+    background: var(--brown);
+    color: var(--cream);
+}
+
+.toggle-btn:hover:not(.active) {
+    background: var(--parchment);
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.input-group select,
+.input-group input {
+    padding: 0.85rem 1rem;
+    border: 3px solid var(--brown);
+    background: var(--parchment-light);
+    color: var(--brown);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    transition: box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.input-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23684d3a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
+}
+
+.input-group select:focus,
+.input-group input:focus {
+    box-shadow: 0 0 0 2px var(--brown-light);
+}
+
+.input-group input::placeholder {
+    color: var(--brown);
+    opacity: 0.4;
+}
+
+.result-panel {
+    background: var(--brown);
+    color: var(--cream);
+    padding: 2rem;
+    border: 3px solid var(--brown);
+    margin-top: 2rem;
+}
+
+.result-panel h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.result-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.result-item {
+    background: rgba(255, 248, 235, 0.1);
+    border: 2px solid rgba(255, 248, 235, 0.2);
+    padding: 0.75rem 1rem;
+    flex: 1 0 auto;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+.result-item .result-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+}
+
+.result-item .result-value {
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1.2;
+}
+
+.result-item .result-value.gold-value {
+    color: var(--gold);
+}
+
+.result-item .result-value.small {
+    font-size: 1rem;
+}
+
+.formula-bar {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 2px solid rgba(255, 248, 235, 0.15);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.8;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.ref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.ref-card {
+    background: var(--cream);
+    border: 3px solid var(--brown);
+    box-shadow: var(--shadow);
+    padding: 1.75rem;
+}
+
+.ref-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--brown-light);
+}
+
+.ref-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ref-card th,
+.ref-card td {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--brown-light);
+}
+
+.ref-card th {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    background: var(--parchment);
+}
+
+.ref-card td {
+    font-weight: 600;
+}
+
+.funding-card {
+    background: var(--cream);
+    border: 3px solid var(--brown);
+    box-shadow: var(--shadow);
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+}
+
+.funding-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--brown-light);
+}
+
+.funding-levels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.funding-level {
+    border: 3px solid var(--brown-light);
+    padding: 1rem;
+    text-align: center;
+    transition: border-color 0.2s;
+}
+
+.funding-level.active {
+    border-color: var(--brown);
+    background: var(--parchment);
+}
+
+.funding-level .level-num {
+    font-weight: 900;
+    font-size: 1.1rem;
+}
+
+.funding-level .level-fruit {
+    font-size: 1.5rem;
+    margin: 0.4rem 0;
+}
+
+.funding-level .level-amount {
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.info-section {
+    background: var(--cream);
+    border: 3px solid var(--brown);
+    box-shadow: var(--shadow);
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+}
+
+.info-section h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--brown-light);
+}
+
+.info-section p {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
+}
+
+.info-section strong {
+    font-weight: 800;
+}
+
+.info-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+}
+
+.info-section ul li {
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    font-weight: 500;
+}
+
+.info-section ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 8px;
+    height: 8px;
+    background: var(--brown);
+}
+
+.growth-stages {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.growth-stage {
+    border: 3px solid var(--brown-light);
+    padding: 1rem;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.growth-stage.active {
+    border-color: var(--brown);
+    background: var(--parchment);
+}
+
+.growth-stage .stage-icon {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+}
+
+.growth-stage .stage-name {
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.growth-stage .stage-range {
+    font-size: 0.78rem;
+    font-weight: 600;
+    opacity: 0.65;
+    margin-top: 0.2rem;
+}
+
+footer {
+    background: var(--brown);
+    color: var(--cream);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+footer p {
+    font-weight: 600;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+footer a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.level-info {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--parchment);
+    border: 2px solid var(--brown-light);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.level-info .level-fruit-icon {
+    font-size: 1.2rem;
+}
+
+.level-info .level-rate {
+    font-weight: 800;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+
+    nav .nav-links {
+        gap: 0.75rem;
+    }
+
+    .hero h1 {
+        font-size: 2.25rem;
+    }
+
+    .hero {
+        padding: 2.5rem 1.5rem 2rem;
+    }
+
+    .container {
+        padding: 0 1rem 3rem;
+    }
+
+    .calc-card {
+        padding: 1.5rem;
+    }
+
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ref-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .funding-levels {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .growth-stages {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .funding-levels {
+        grid-template-columns: 1fr;
+    }
+}

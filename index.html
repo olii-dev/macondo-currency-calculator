@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macondo Currency Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://macondo.hackclub.com/android-chrome-512x512.webp">
+</head>
+<body>
+    <nav>
+        <div class="logo">Macondo Currency Calculator</div>
+    </nav>
+
+    <section class="hero">
+        <h1>Currency Calculator</h1>
+        <p>Calculate how much gold you'll earn for your projects. Pick your type, level, hours, and streak.</p>
+    </section>
+
+    <div class="container">
+        <div class="calc-card">
+            <h2>Calculator</h2>
+
+            <div class="toggle-group">
+                <button class="toggle-btn" data-type="software" onclick="setProjectType('software')">Software</button>
+                <button class="toggle-btn" data-type="hardware" onclick="setProjectType('hardware')">Hardware</button>
+            </div>
+
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Project Level</label>
+                    <select id="level-select" onchange="setLevel(this.value)">
+                        <option value="1">L1 — Beginner</option>
+                        <option value="2">L2 — Intermediate</option>
+                        <option value="3">L3 — Advanced</option>
+                        <option value="4">L4 — Expert</option>
+                    </select>
+                    <div class="level-info" id="level-info"></div>
+                </div>
+
+                <div class="input-group">
+                    <label>Hours Worked</label>
+                    <input type="number" id="hours-input" placeholder="e.g. 10" min="0" step="0.5" oninput="setHours(this.value)">
+                </div>
+
+                <div class="input-group">
+                    <label>Streak Days</label>
+                    <input type="number" id="streak-input" placeholder="e.g. 7" min="0" step="1" oninput="setStreak(this.value)">
+                </div>
+            </div>
+
+            <div class="result-panel">
+                <h3>Your Earnings</h3>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Total Gold</div>
+                        <div class="result-value gold-value" id="result-gold">0 gold</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Base Gold</div>
+                        <div class="result-value small" id="result-base">0 gold</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Streak Bonus</div>
+                        <div class="result-value small" id="result-bonus">+0 gold</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Gold Rate</div>
+                        <div class="result-value small" id="result-rate">40 / hr</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Multiplier</div>
+                        <div class="result-value small" id="result-multiplier">1.00x</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Fruit</div>
+                        <div class="result-value small" id="result-fruit">🥭 Mango</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Plant Stage</div>
+                        <div class="result-value small" id="result-stage">🌱 Seedling</div>
+                    </div>
+                </div>
+                <div class="formula-bar" id="formula-text">Enter hours and streak to calculate</div>
+            </div>
+        </div>
+
+        <div class="ref-grid">
+            <div class="ref-card">
+                <h3>Gold Per Hour</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th>Label</th>
+                            <th>Gold / hr</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>L1</td><td>Beginner</td><td>40</td></tr>
+                        <tr><td>L2</td><td>Intermediate</td><td>45</td></tr>
+                        <tr><td>L3</td><td>Advanced</td><td>50</td></tr>
+                        <tr><td>L4</td><td>Expert</td><td>60</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ref-card">
+                <h3>Fruit Assignment</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th>Software</th>
+                            <th>Hardware</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>L1</td><td>🥭 Mango</td><td>🍎 Guava</td></tr>
+                        <tr><td>L2</td><td>🍍 Pineapple</td><td>🥥 Coconut</td></tr>
+                        <tr><td>L3</td><td>🍈 Papaya</td><td>🍉 Watermelon</td></tr>
+                        <tr><td>L4</td><td>🍫 Cocoa</td><td>🥑 Avocado</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="ref-card" id="funding-section" style="display:none;">
+            <h3>Hardware Funding Caps</h3>
+            <div class="funding-levels" id="funding-levels"></div>
+        </div>
+
+        <div class="info-section">
+            <h3>Plant Growth Stages</h3>
+            <p>Your project's plant stage comes from your <strong>project streak</strong>, the number of days in a row you've worked on that project.</p>
+            <div class="growth-stages" id="growth-stages">
+                <div class="growth-stage" data-stage="Seedling">
+                    <div class="stage-icon">🌱</div>
+                    <div class="stage-name">Seedling</div>
+                    <div class="stage-range">1–2 days</div>
+                </div>
+                <div class="growth-stage" data-stage="Sprout">
+                    <div class="stage-icon">🌿</div>
+                    <div class="stage-name">Sprout</div>
+                    <div class="stage-range">3–5 days</div>
+                </div>
+                <div class="growth-stage" data-stage="Leafy">
+                    <div class="stage-icon">🍃</div>
+                    <div class="stage-name">Leafy</div>
+                    <div class="stage-range">6–9 days</div>
+                </div>
+                <div class="growth-stage" data-stage="Fruiting">
+                    <div class="stage-icon">🌾</div>
+                    <div class="stage-name">Fruiting</div>
+                    <div class="stage-range">10+ days</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Starfruit</h3>
+            <p>To purchase some shop items, you need to unlock them with a <strong>starfruit</strong> purchase. You earn starfruit when a reviewer marks your ship as <strong>"extra fruity"</strong> during approval.</p>
+            <ul>
+                <li>Each extra fruity ship earns <strong>1 starfruit</strong> in addition to normal gold</li>
+                <li>The flag is <strong>per ship</strong>, not per project which means every submission is a new opportunity to get starfruit</li>
+                <li>Spending 1 starfruit <strong>unlocks</strong> the gated shop item, but you still need the gold price to buy it</li>
+                <li>Unlocks are one time per item and stay permanent even if the item is edited</li>
+                <li>Starfruit cannot be converted to gold or traded</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h3>Streak System</h3>
+            <p>Every project tracks its own <strong>project streak</strong>, the number of consecutive days you've put real work into that project.</p>
+            <ul>
+                <li>Each streak day adds <strong>+1% to your gold</strong> when you ship ( for example 10 days = 1.10x, 30 days = 1.30x)</li>
+                <li>A streak day needs <strong>at least 1 hour total per day</strong> (Hackatime + journal hours combined)</li>
+                <li>Missing a day on a project <strong>resets that project's streak to 1</strong>, (unless you use a streak freeze) other projects are unaffected</li>
+                <li><strong>Streak freezes</strong> (buy in the shop) auto spend (you can turn this off) to protect a missed day, maximum 5 at a time</li>
+                <li>Streak days run <strong>midnight to midnight</strong> in your timezone (<span id="streak-timezone">your local timezone</span>) and refresh in <strong id="streak-refresh">--</strong></li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h3>Pending Hardware Gold</h3>
+            <p>Hardware projects gate their gold reward behind a <strong>build complete</strong> ship.</p>
+            <ul>
+                <li>When a non build complete hardware ship is approved, gold is <strong>recorded but pending</strong></li>
+                <li>Pending gold <strong>doesn't count toward your balance</strong> and can't be spent</li>
+                <li>Submit a <strong>"build complete"</strong> ship on the same project to unlock all pending gold at once</li>
+                <li>The pending amount shows on your profile</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>Built for the <a href="https://macondo.hackclub.com/">Macondo</a> community by <a href="https://github.com/olii-dev">olii-dev</a>. This is not an official tool and is fan made.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
