@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Macondo Currency Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="https://macondo.hackclub.com/android-chrome-512x512.webp">
+    <link rel="icon" href="public/favicon.ico" sizes="any">
+    <link rel="icon" type="image/webp" href="public/favicon-32x32.webp" sizes="32x32">
+    <link rel="icon" type="image/webp" href="public/favicon-16x16.webp" sizes="16x16">
+    <link rel="apple-touch-icon" href="public/apple-touch-icon.webp">
+    <link rel="manifest" href="public/site.webmanifest">
+    <meta name="theme-color" content="#684D3A">
     <script data-goatcounter="https://oli-m.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -75,11 +80,11 @@
                     </div>
                     <div class="result-item">
                         <div class="result-label">Fruit</div>
-                        <div class="result-value small" id="result-fruit">🥭 Mango</div>
+                        <div class="result-value small" id="result-fruit"><img src="public/images/fruits/mango/icon.webp" class="result-fruit-icon" alt="Mango"> Mango</div>
                     </div>
                     <div class="result-item">
                         <div class="result-label">Plant Stage</div>
-                        <div class="result-value small" id="result-stage">🌱 Seedling</div>
+                        <div class="result-value small" id="result-stage"><img src="public/images/fruits/mango/etapa_1.webp" class="result-fruit-icon" alt="Seedling"> Seedling</div>
                     </div>
                 </div>
                 <div class="formula-bar" id="formula-text">Enter hours and streak to calculate</div>
@@ -117,10 +122,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>L1</td><td>🥭 Mango</td><td>🍎 Guava</td></tr>
-                        <tr><td>L2</td><td>🍍 Pineapple</td><td>🥥 Coconut</td></tr>
-                        <tr><td>L3</td><td>🍈 Papaya</td><td>🍉 Watermelon</td></tr>
-                        <tr><td>L4</td><td>🍫 Cocoa</td><td>🥑 Avocado</td></tr>
+                        <tr><td>L1</td><td><img src="public/images/fruits/mango/icon.webp" class="table-fruit-icon" alt="Mango"> Mango</td><td><img src="public/images/fruits/guava/icon_interior.webp" class="table-fruit-icon" alt="Guava"> Guava</td></tr>
+                        <tr><td>L2</td><td><img src="public/images/fruits/pineapple/icon.webp" class="table-fruit-icon" alt="Pineapple"> Pineapple</td><td><img src="public/images/fruits/coco/icon_interior.webp" class="table-fruit-icon" alt="Coconut"> Coconut</td></tr>
+                        <tr><td>L3</td><td><img src="public/images/fruits/papaya/icon_interior.webp" class="table-fruit-icon" alt="Papaya"> Papaya</td><td><img src="public/images/fruits/watermelon/icon_interior.webp" class="table-fruit-icon" alt="Watermelon"> Watermelon</td></tr>
+                        <tr><td>L4</td><td><img src="public/images/fruits/cocoa/icon_interior.webp" class="table-fruit-icon" alt="Cocoa"> Cocoa</td><td><img src="public/images/fruits/avocado/icon_interior.webp" class="table-fruit-icon" alt="Avocado"> Avocado</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -136,22 +141,22 @@
             <p>Your project's plant stage comes from your <strong>project streak</strong>, the number of days in a row you've worked on that project.</p>
             <div class="growth-stages" id="growth-stages">
                 <div class="growth-stage" data-stage="Seedling">
-                    <div class="stage-icon">🌱</div>
+                    <div class="stage-icon"><img src="public/images/fruits/mango/etapa_1.webp" class="stage-fruit-icon" alt="Seedling"></div>
                     <div class="stage-name">Seedling</div>
                     <div class="stage-range">1–2 days</div>
                 </div>
                 <div class="growth-stage" data-stage="Sprout">
-                    <div class="stage-icon">🌿</div>
+                    <div class="stage-icon"><img src="public/images/fruits/mango/etapa_2.webp" class="stage-fruit-icon" alt="Sprout"></div>
                     <div class="stage-name">Sprout</div>
                     <div class="stage-range">3–5 days</div>
                 </div>
                 <div class="growth-stage" data-stage="Leafy">
-                    <div class="stage-icon">🍃</div>
+                    <div class="stage-icon"><img src="public/images/fruits/mango/etapa_3.webp" class="stage-fruit-icon" alt="Leafy"></div>
                     <div class="stage-name">Leafy</div>
                     <div class="stage-range">6–9 days</div>
                 </div>
                 <div class="growth-stage" data-stage="Fruiting">
-                    <div class="stage-icon">🌾</div>
+                    <div class="stage-icon"><img src="public/images/fruits/mango/etapa_4.webp" class="stage-fruit-icon" alt="Fruiting"></div>
                     <div class="stage-name">Fruiting</div>
                     <div class="stage-range">10+ days</div>
                 </div>
@@ -159,7 +164,7 @@
         </div>
 
         <div class="info-section">
-            <h3>Starfruit</h3>
+            <h3><img src="public/images/fruits/starfruit.webp" class="section-fruit-icon" alt="Starfruit"> Starfruit</h3>
             <p>To purchase some shop items, you need to unlock them with a <strong>starfruit</strong> purchase. You earn starfruit when a reviewer marks your ship as <strong>"extra fruity"</strong> during approval.</p>
             <ul>
                 <li>Each extra fruity ship earns <strong>1 starfruit</strong> in addition to normal gold</li>

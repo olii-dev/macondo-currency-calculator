@@ -13,17 +13,17 @@ var levelLabels = {
 };
 
 var softwareFruits = {
-    1: { name: "Mango", emoji: "\ud83e\udd6d" },
-    2: { name: "Pineapple", emoji: "\ud83c\udf4d" },
-    3: { name: "Papaya", emoji: "\ud83c\udf4b" },
-    4: { name: "Cocoa", emoji: "\ud83c\udf6b" }
+    1: { name: "Mango", icon: "public/images/fruits/mango/icon.webp" },
+    2: { name: "Pineapple", icon: "public/images/fruits/pineapple/icon.webp" },
+    3: { name: "Papaya", icon: "public/images/fruits/papaya/icon_interior.webp" },
+    4: { name: "Cocoa", icon: "public/images/fruits/cocoa/icon_interior.webp" }
 };
 
 var hardwareFruits = {
-    1: { name: "Guava", emoji: "\ud83c\udf50" },
-    2: { name: "Coconut", emoji: "\ud83e\udd65" },
-    3: { name: "Watermelon", emoji: "\ud83c\udf49" },
-    4: { name: "Avocado", emoji: "\ud83e\udd51" }
+    1: { name: "Guava", icon: "public/images/fruits/guava/icon_interior.webp" },
+    2: { name: "Coconut", icon: "public/images/fruits/coco/icon_interior.webp" },
+    3: { name: "Watermelon", icon: "public/images/fruits/watermelon/icon_interior.webp" },
+    4: { name: "Avocado", icon: "public/images/fruits/avocado/icon_interior.webp" }
 };
 
 var hardwareFunding = {
@@ -34,10 +34,10 @@ var hardwareFunding = {
 };
 
 var growthStages = [
-    { min: 1, max: 2, name: "Seedling", icon: "\ud83c\udf31" },
-    { min: 3, max: 5, name: "Sprout", icon: "\ud83c\udf3f" },
-    { min: 6, max: 9, name: "Leafy", icon: "\ud83c\udf3c" },
-    { min: 10, max: Infinity, name: "Fruiting", icon: "\ud83c\udf3e" }
+    { min: 1, max: 2, name: "Seedling", etapa: 1 },
+    { min: 3, max: 5, name: "Sprout", etapa: 2 },
+    { min: 6, max: 9, name: "Leafy", etapa: 3 },
+    { min: 10, max: Infinity, name: "Fruiting", etapa: 4 }
 ];
 
 var projectType = "software";
@@ -59,6 +59,15 @@ function getGrowthStage(days) {
     return growthStages[0];
 }
 
+function fruitImg(path, cls, alt) {
+    return '<img src="' + path + '" class="' + (cls || "result-fruit-icon") + '" alt="' + (alt || "") + '">';
+}
+
+function getStageIcon(fruitPath, etapa) {
+    var basePath = fruitPath.replace(/\/(icon|icon_interior)\.webp$/, "/etapa_" + etapa + ".webp");
+    return basePath;
+}
+
 function calculate() {
     var goldPerHour = goldRates[level];
     var baseGold = Math.round(goldPerHour * hours);
@@ -68,14 +77,15 @@ function calculate() {
     var multiplier = 1 + bonusPercent;
     var fruit = getFruit();
     var stage = getGrowthStage(streakDays);
+    var stageIconPath = getStageIcon(fruit.icon, stage.etapa);
 
     document.getElementById("result-gold").textContent = totalGold > 0 ? totalGold + " gold" : "0 gold";
     document.getElementById("result-base").textContent = baseGold > 0 ? baseGold + " gold" : "0 gold";
     document.getElementById("result-bonus").textContent = bonusGold > 0 ? "+" + bonusGold + " gold" : "+0 gold";
     document.getElementById("result-rate").textContent = goldPerHour + " / hr";
     document.getElementById("result-multiplier").textContent = multiplier.toFixed(2) + "x";
-    document.getElementById("result-fruit").textContent = fruit.emoji + " " + fruit.name;
-    document.getElementById("result-stage").textContent = stage.icon + " " + stage.name;
+    document.getElementById("result-fruit").innerHTML = fruitImg(fruit.icon, "result-fruit-icon", fruit.name) + " " + fruit.name;
+    document.getElementById("result-stage").innerHTML = fruitImg(stageIconPath, "result-fruit-icon", stage.name) + " " + stage.name;
 
     document.getElementById("formula-text").textContent =
         totalGold > 0
@@ -98,7 +108,7 @@ function updateFundingLevels() {
         div.className = "funding-level" + (i === level ? " active" : "");
         div.innerHTML =
             '<div class="level-num">L' + i + "</div>" +
-            '<div class="level-fruit">' + fruits[i].emoji + "</div>" +
+            '<div class="level-fruit">' + fruitImg(fruits[i].icon, "funding-fruit-icon", fruits[i].name) + "</div>" +
             '<div class="level-amount">' + (projectType === "hardware" ? "$" + hardwareFunding[i] : fruits[i].name) + "</div>";
         container.appendChild(div);
     }
@@ -125,7 +135,7 @@ function updateLevelInfo() {
     var info = document.getElementById("level-info");
     var fruit = getFruit();
     info.innerHTML =
-        '<span class="level-fruit-icon">' + fruit.emoji + "</span>" +
+        '<span class="level-fruit-icon">' + fruitImg(fruit.icon, "level-fruit-icon-img", fruit.name) + "</span>" +
         '<span>L' + level + " \u00b7 " + levelLabels[level] + " \u00b7 " + fruit.name + "</span>" +
         '<span class="level-rate" style="margin-left:auto">' + goldRates[level] + " gold/hr</span>";
 }

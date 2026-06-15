@@ -466,12 +466,44 @@ footer a:hover {
     text-decoration: underline;
 }
 
+.result-fruit-icon {
+    width: 1.2em;
+    height: 1.2em;
+    vertical-align: middle;
+    display: inline-block;
+}
 
+.table-fruit-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 0.25rem;
+}
 
-footer .visit-count {
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    opacity: 0.5;
+.stage-fruit-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-block;
+}
+
+.funding-fruit-icon {
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+}
+
+.section-fruit-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+}
+
+.level-fruit-icon-img {
+    width: 1.2rem;
+    height: 1.2rem;
+    display: inline-block;
 }
 
 .level-info {
