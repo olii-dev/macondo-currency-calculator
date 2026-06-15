@@ -70,11 +70,11 @@ function getStageIcon(fruitPath, etapa) {
 
 function calculate() {
     var goldPerHour = goldRates[level];
-    var baseGold = Math.round(goldPerHour * hours);
     var bonusPercent = streakDays * 0.01;
-    var bonusGold = Math.round(baseGold * bonusPercent);
-    var totalGold = baseGold + bonusGold;
     var multiplier = 1 + bonusPercent;
+    var baseGold = Math.round(goldPerHour * hours);
+    var totalGold = Math.round(goldPerHour * hours * multiplier);
+    var bonusGold = totalGold - baseGold;
     var fruit = getFruit();
     var stage = getGrowthStage(streakDays);
     var stageIconPath = getStageIcon(fruit.icon, stage.etapa);
