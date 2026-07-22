@@ -20,7 +20,7 @@
 
     <section class="hero">
         <h1>Currency Calculator</h1>
-        <p>Calculate how much gold you'll earn for your projects. Pick your type, level, hours, and streak.</p>
+        <p>Calculate how much gold you'll earn for your projects. Pick your type, level, hours, and streak. Hardware projects can also deduct parts funding from logged hours.</p>
     </section>
 
     <div class="container">
@@ -52,6 +52,15 @@
                 <div class="input-group">
                     <label>Streak Days</label>
                     <input type="number" id="streak-input" placeholder="e.g. 7" min="0" step="1" oninput="setStreak(this.value)">
+                </div>
+
+                <div class="input-group" id="funding-input-group" style="display:none;">
+                    <label>Parts Funding ($)</label>
+                    <input type="number" id="funding-input" placeholder="e.g. 20" min="0" step="1" oninput="setPartsFunding(this.value)">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="round-funding-input" onchange="setRoundFunding(this.checked)">
+                        Round up to approval tier ($10, $20, $50…)
+                    </label>
                 </div>
             </div>
 
@@ -86,7 +95,20 @@
                         <div class="result-label">Plant Stage</div>
                         <div class="result-value small" id="result-stage"><img src="public/images/fruits/mango/etapa_1.webp" class="result-fruit-icon" alt="Seedling"> Seedling</div>
                     </div>
+                    <div class="result-item" id="result-funding-row" style="display:none;">
+                        <div class="result-label">Parts Funding</div>
+                        <div class="result-value small" id="result-funding">$0</div>
+                    </div>
+                    <div class="result-item" id="result-funding-hours-row" style="display:none;">
+                        <div class="result-label">Funding Hours</div>
+                        <div class="result-value small" id="result-funding-hours">0 hrs</div>
+                    </div>
+                    <div class="result-item" id="result-gold-hours-row" style="display:none;">
+                        <div class="result-label">Gold Hours</div>
+                        <div class="result-value small" id="result-gold-hours">0 hrs</div>
+                    </div>
                 </div>
+                <div class="funding-note" id="funding-note" style="display:none;"></div>
                 <div class="formula-bar" id="formula-text">Enter hours and streak to calculate</div>
             </div>
         </div>
@@ -132,8 +154,22 @@
         </div>
 
         <div class="ref-card" id="funding-section" style="display:none;">
-            <h3>Hardware Funding Caps</h3>
+            <h3>Hardware Funding</h3>
+            <p class="ref-card-desc">Parts grants are capped by level. Each dollar of funding converts to hours at your level's funding rate, and those hours are deducted from your ship before gold is calculated.</p>
             <div class="funding-levels" id="funding-levels"></div>
+        </div>
+
+        <div class="info-section" id="hardware-funding-info" style="display:none;">
+            <h3>Hardware Funding vs Gold</h3>
+            <p>On hardware build ships, your logged hours split between parts funding and gold. The funding rate depends on your project level:</p>
+            <ul>
+                <li>L1: <strong>$4/hr</strong> (up to $100 cap)</li>
+                <li>L2: <strong>$4.50/hr</strong> (up to $200 cap)</li>
+                <li>L3: <strong>$5/hr</strong> (up to $400 cap)</li>
+                <li>L4: <strong>$6/hr</strong> (up to $1,000 cap)</li>
+            </ul>
+            <p>Example: 20 hours at L3 with $20 funding → 4 funding hrs ($20 ÷ $5) + 16 gold hrs × 50 gold/hr = 800 base gold (before streak).</p>
+            <p>Reviewers sometimes round funding up to convenient tiers ($10, $20, $50, etc.). Use the checkbox in the calculator to estimate that — it's based on community reports, not official policy.</p>
         </div>
 
         <div class="info-section">
